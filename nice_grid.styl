@@ -1,21 +1,26 @@
 // Nice Grid
 // A simple, responsive, handy and nice CSS grid.
+// Heavily inspired by gridism: https://github.com/cobyism/gridism
 //
 // Usage: grid()
 //
 // https://github.com/cinan/gridism
 
 grid(
-  unitClass = '[class*="w-"]',
-  padding = 1rem,
-  mobilePadding = 1rem,
-  maxWidth = 960px,
-  minWidth = 568px,
-  supportRTL = true
+unitClass = 'w-',
+padding = 1rem,
+mobilePadding = 1rem,
+maxWidth = 960px,
+minWidth = 568px,
+supportRTL = true
 )
 
+  class1 = '[class^=%s]' % unitClass
+  class2 = '[class*= %s]' % unitClass
+
   .grid,
-  {unitClass}
+  {class1},
+  {class2}
     -webkit-box-sizing: border-box
     -moz-box-sizing: border-box
     box-sizing: border-box
@@ -24,19 +29,21 @@ grid(
     display: block
     clear: both
 
-    {unitClass}
+    {class1},
+    {class2}
       float: left
       width: 100%
       padding-left: 0
       padding-right: padding
 
-  .grid {unitClass}:last-child,
-  {unitClass} {unitClass}:last-child
-    padding-left: 0
-    padding-right: 0
-
-  .no-gutters {unitClass},
-  {unitClass}.no-gutters
+  .grid {class1}:last-child,
+  .grid {class2}:last-child,
+  {class1} {class1}:last-child,
+  {class1} {class2}:last-child,
+  {class2} {class1}:last-child,
+  {class2} {class2}:last-child,
+  {class1}.no-gutters,
+  {class2}.no-gutters
     padding-left: 0
     padding-right: 0
 
@@ -45,11 +52,11 @@ grid(
     max-width: maxWidth
     margin: 0 auto
 
-  for $i in (1..5)
-    for $j in (1..5)
-      if $i < $j or $i == 1
-        .grid {'.w-' + $i + '-' + $j}
-          width: round($i / $j * 100%, 7)
+  for i in (1..5)
+    for j in (1..5)
+      if i < j or i == 1
+        .grid {'.' + unitClass + i + '-' + j}
+          width: round(i / j * 100%, 7)
 
   .grid:before, .grid:after
     display: table
@@ -59,32 +66,41 @@ grid(
   .grid:after
     clear: both
 
-  {unitClass} img
+  {class1} img,
+  {class2} img
     max-width: 100%
 
   if supportRTL
     html[dir=rtl]
-      .grid {unitClass}
+      .grid {class1},
+      .grid {class2}
         float: right
         padding-left: padding
         padding-right: 0
 
-      .grid {unitClass}:last-child,
-      {unitClass} {unitClass}:last-child
-        padding-left: 0
-        padding-right: 0
-
-      .no-gutters {unitClass},
-      {unitClass}.no-gutters
+      .grid {class1}:last-child,
+      .grid {class2}:last-child,
+      {class1} {class1}:last-child,
+      {class1} {class2}:last-child,
+      {class2} {class1}:last-child,
+      {class2} {class2}:last-child,
+      {class1}.no-gutters,
+      {class2}.no-gutters
         padding-left: 0
         padding-right: 0
 
   @media screen and (max-width: minWidth)
-    .grid:not(.no-stacking-on-mobiles) > {unitClass}
+    .grid:not(.no-stacking-on-mobiles) > {class1},
+    .grid:not(.no-stacking-on-mobiles) > {class2}
       width: 100% !important
       padding-left: mobilePadding
       padding-right: mobilePadding
 
-    {unitClass} .grid {unitClass}
+    {class1} .grid {class1},
+    {class1} .grid {class2},
+    {class2} .grid {class1},
+    {class2} .grid {class2}
       padding-left: 0
       padding-right: 0
+
+grid()
