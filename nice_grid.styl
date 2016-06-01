@@ -16,7 +16,7 @@ supportRTL = true
 )
 
   class1 = '[class^=%s]' % unitClass
-  class2 = '[class*= %s]' % unitClass
+  class2 = '[class*=%s]' % (' ' + unitClass)
 
   .grid,
   {class1},
@@ -102,5 +102,3 @@ supportRTL = true
     {class2} .grid {class2}
       padding-left: 0
       padding-right: 0
-
-grid()
