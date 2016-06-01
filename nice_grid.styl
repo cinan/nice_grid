@@ -1,0 +1,90 @@
+// Nice Grid
+// A simple, responsive, handy and nice CSS grid.
+//
+// Usage: grid()
+//
+// https://github.com/cinan/gridism
+
+grid(
+  unitClass = '[class*="w-"]',
+  padding = 1rem,
+  mobilePadding = 1rem,
+  maxWidth = 960px,
+  minWidth = 568px,
+  supportRTL = true
+)
+
+  .grid,
+  {unitClass}
+    -webkit-box-sizing: border-box
+    -moz-box-sizing: border-box
+    box-sizing: border-box
+
+  .grid
+    display: block
+    clear: both
+
+    {unitClass}
+      float: left
+      width: 100%
+      padding-left: 0
+      padding-right: padding
+
+  .grid {unitClass}:last-child,
+  {unitClass} {unitClass}:last-child
+    padding-left: 0
+    padding-right: 0
+
+  .no-gutters {unitClass},
+  {unitClass}.no-gutters
+    padding-left: 0
+    padding-right: 0
+
+  .wrap .grid,
+  .grid.wrap
+    max-width: maxWidth
+    margin: 0 auto
+
+  for $i in (1..5)
+    for $j in (1..5)
+      if $i < $j or $i == 1
+        .grid {'.w-' + $i + '-' + $j}
+          width: round($i / $j * 100%, 7)
+
+  .grid:before, .grid:after
+    display: table
+    content: ""
+    line-height: 0
+
+  .grid:after
+    clear: both
+
+  {unitClass} img
+    max-width: 100%
+
+  if supportRTL
+    html[dir=rtl]
+      .grid {unitClass}
+        float: right
+        padding-left: padding
+        padding-right: 0
+
+      .grid {unitClass}:last-child,
+      {unitClass} {unitClass}:last-child
+        padding-left: 0
+        padding-right: 0
+
+      .no-gutters {unitClass},
+      {unitClass}.no-gutters
+        padding-left: 0
+        padding-right: 0
+
+  @media screen and (max-width: minWidth)
+    .grid:not(.no-stacking-on-mobiles) > {unitClass}
+      width: 100% !important
+      padding-left: mobilePadding
+      padding-right: mobilePadding
+
+    {unitClass} .grid {unitClass}
+      padding-left: 0
+      padding-right: 0

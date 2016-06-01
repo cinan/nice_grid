@@ -1,0 +1,23 @@
+{
+  "name": "nice_grid",
+  "version": "1.0.0",
+  "description": "A simple, responsive, handy and nice CSS grid",
+  "dependencies": {
+    "stylus": "^0.54.5"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cinan/nice_grid.git"
+  },
+  "keywords": [
+    "css",
+    "grid",
+    "stylus"
+  ],
+  "author": "Cinan Rakosnik",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cinan/nice_grid/issues"
+  },
+  "homepage": "https://github.com/cinan/nice_grid"
+}
