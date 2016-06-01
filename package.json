@@ -1,6 +1,6 @@
 {
   "name": "nice_grid",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A simple, responsive, handy and nice CSS grid",
   "dependencies": {
     "stylus": "^0.54.5"
